@@ -8,7 +8,7 @@ export class ContactList extends Component {
     console.log(this.props.contacts.length);
 
     if (this.props.contacts.length < 1) {
-      return <EmptyList>Nothing to show at this moment</EmptyList>;
+      return <EmptyList>No contacts in your phonebook!</EmptyList>;
     } else {
       return (
         <ContactListStyle>
