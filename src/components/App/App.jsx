@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
+import { GlobalStyle } from '../GlobalStyle';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { ContactForm } from './ContactForm/Form';
-import { ContactList } from './ContactList/ContactList';
-import { Section } from './Section/Section';
-import { ContactFilter } from './ContactFilter/ContactFilter';
+import { AppStyle } from './App.styled';
+
+import { ContactForm } from '../ContactForm/Form';
+import { ContactList } from '../ContactList/ContactList';
+import { Section } from '../Section/Section';
+import { ContactFilter } from '../ContactFilter/ContactFilter';
 
 const toastSettings = {
   position: 'top-center',
@@ -21,13 +24,11 @@ const toastSettings = {
 export class App extends Component {
   state = {
     contacts: [
-      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+      // { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+      // { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+      // { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+      // { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
-    name: '',
-    number: '',
     filter: '',
   };
 
@@ -66,7 +67,7 @@ export class App extends Component {
       contact.name.toLowerCase().includes(adjustedFilter)
     );
     return (
-      <div>
+      <AppStyle>
         <Section title="Phonebook">
           <ContactForm onAdd={this.addContact} />
         </Section>
@@ -76,9 +77,10 @@ export class App extends Component {
             contacts={visibleContacts}
             onDelete={this.deleteContact}
           />
-          <ToastContainer />
         </Section>
-      </div>
+        <ToastContainer />
+        <GlobalStyle />
+      </AppStyle>
     );
   }
 }

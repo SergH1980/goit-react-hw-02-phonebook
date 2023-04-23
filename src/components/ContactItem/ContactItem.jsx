@@ -1,20 +1,39 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import {
+  ContactItemStyled,
+  ContactItemName,
+  ContactItemNumber,
+  ContactItemButton,
+} from './ContactItem.styled';
 
 export class ContactItem extends Component {
+  static propTypes = {
+    onDelete: PropTypes.func.isRequired,
+    contacts: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        number: PropTypes.string.isRequired,
+      }).isRequired
+    ),
+  };
   toHandleDelete = event => {
     this.props.onDelete(event.currentTarget);
-    console.log(event.currentTarget.id);
   };
   render() {
     return this.props.contacts.map(contact => (
-      <li key={contact.id}>
-        <p>
-          {contact.name}: {contact.number}
-        </p>
-        <button id={contact.id} type="button" onClick={this.toHandleDelete}>
+      <ContactItemStyled key={contact.id}>
+        <ContactItemName>{contact.name}:</ContactItemName>
+        <ContactItemNumber>{contact.number}</ContactItemNumber>
+        <ContactItemButton
+          id={contact.id}
+          type="button"
+          onClick={this.toHandleDelete}
+        >
           Delete
-        </button>
-      </li>
+        </ContactItemButton>
+      </ContactItemStyled>
     ));
   }
 }
